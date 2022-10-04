@@ -19,8 +19,15 @@ namespace WindowsFormsApp1
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            var penny = int.Parse(this.txtPenny.Text);
-
+            int penny;
+            try
+            {
+                penny = int.Parse(this.txtPenny.Text);
+            }
+            catch
+            {
+                return;
+            }
             MessageBox.Show(logic.Convert(penny));
         }
     }
@@ -35,7 +42,19 @@ namespace WindowsFormsApp1
                 int rubles = penny / 100;
                 var pennyRes = penny % 100;
 
-                if (pennyRes == 0)
+                if (pennyRes <= 20)
+                {
+                    if (rubles % 10 == 1)
+                        outMessage = rubles + " рубль " + pennyRes + " копеек";
+                    else if (rubles == 0)
+                        outMessage = pennyRes + " копеек";
+                    else if (rubles % 10 > 1 && rubles % 10 < 5)
+                        outMessage = rubles + " рубля " + pennyRes + " копеек";
+                    else if ((rubles % 10) > 4 || (rubles % 10) == 0)
+                        outMessage = rubles + " рублей " + pennyRes + " копеек";
+
+                }
+                else if (pennyRes == 0)
                 {
                     if (rubles % 10 == 1)
                         outMessage = rubles + " рубль ровно";
