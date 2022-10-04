@@ -15,6 +15,8 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
+
+            txtPenny.Text = Properties.Settings.Default.penny.ToString();
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -28,6 +30,10 @@ namespace WindowsFormsApp1
             {
                 return;
             }
+
+            Properties.Settings.Default.penny = penny;
+            Properties.Settings.Default.Save();
+
             MessageBox.Show(logic.Convert(penny));
         }
     }
